@@ -28,12 +28,12 @@ public class SecureSystem {
 		authenticate(sysHash, userHash);
 	}
 
+	/*
+	 * When a valid user logs on, the system will generate a random number(nonce)
+	 * that will be hashed with the user's known password and the hash will be
+	 * stored in the system.
+	 */
 	public static int login(String username) {
-		/*
-		 * When a valid user logs on, the system will generate a random number(nonce)
-		 * that will be hashed with the user's known password and the hash will be
-		 * stored in the system.
-		 */
 		String user = c.getUsername();
 		int nonce = 0;
 
@@ -48,12 +48,26 @@ public class SecureSystem {
 		return nonce;
 	}
 
+	
 	public static String hash(int r, String password) {
-		// INSERT PASSWORD HASH ALGORITHM HERE
-
 		String hash = r + password;
-
-		return hash;
+		try {
+			MessageDigest ms = MessageDigest.getInstance("SHA-1");
+			
+			byte[] arr = ms.digest(hash.getBytes());
+			
+			BigInteger num = new BigInteger(1, arr);
+			
+			String hex = num.toString(16);
+			
+			while(hex.length() < 32) {
+				hex = "0" + hex;
+			}
+			
+			return hex;
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public static void authenticate(String h1, String h2) {
