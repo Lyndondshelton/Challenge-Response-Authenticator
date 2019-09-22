@@ -57,10 +57,10 @@ public class SecureSystem {
 	}
 
 	public static void authenticate(String h1, String h2) {
-		if (h2 == h1) {
+		if (h1.equals(h2)) {
 			System.out.printf("\nCongratulations! The passwords match!\n");
-			System.out.printf("sysHash = %s", h1);
-			System.out.printf("userHash = %s", h2);
+			System.out.printf("sysHash = %s\n", h1);
+			System.out.printf("userHash = %s\n", h2);
 		} else {
 			System.out.printf("\nSorry, an incorrect password was given.\n");
 			System.out.printf("sysHash = %s\n", h1);
