@@ -1,6 +1,9 @@
 package com.lds.CRA;
 
 import com.lds.CRA.obj.Client;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class SecureSystem {
 
